@@ -20,4 +20,6 @@ CMD ["jruby", "-G", "-r", "jbundler", "-S", "rackup", "-o", "0.0.0.0", "config.r
 # these didn't work as ONBUILD, strangely. Idk why. -JBM
 COPY Gemfile Gemfile.lock Jarfile Jarfile.lock ./
 RUN bundle install && jruby -S jbundle install
+RUN mkdir /jar
+RUN find /root/.m2 -name "*.jar" -exec cp {} /jar \;
 COPY . .
